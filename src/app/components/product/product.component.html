@@ -1,0 +1,29 @@
+<h2>Product Section</h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Product Code</th>
+        <th scope="col">Product Description</th>
+        <th scope="col">Status</th>
+        <th scope="col">Location</th>
+        <th scope="col">Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{product.dataStore.dataType}}</td>
+        <td>{{product.productName}}</td>
+        <td>{{product.productCode}}</td>
+        <td>{{product.productDescription}}</td>
+        <td>{{product.status}}</td>
+        <td>{{product.location}}</td>
+        <td><a [routerLink]="['/product/edit',product.id]">Edit</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
