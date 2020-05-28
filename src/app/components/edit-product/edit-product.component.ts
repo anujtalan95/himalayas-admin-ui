@@ -12,6 +12,17 @@ export class EditProductComponent implements OnInit {
 
   public product;
   productEditForm:FormGroup;
+  searchTagsMaster= [
+    {
+      "code":"Water"
+    },
+    {
+      "code":"Air"
+    },
+    {
+      "code":"Land"
+    }
+  ];
   //private  imgSrc = 'assets/684094.jpg';
   validMessage:string="";
   constructor(private productService:ProductService,private route:ActivatedRoute,private router:Router) { }
@@ -19,26 +30,44 @@ export class EditProductComponent implements OnInit {
   ngOnInit(): void {
     this.getProduct(this.route.snapshot.params.id);
     this.productEditForm = new FormGroup({
-      productCode: new FormControl(''),
-      productName: new FormControl(''),
-      productDescription: new FormControl(''),
-      location: new FormControl(''),
-      status: new FormControl(''),
-      imageCredit: new FormControl(''),
-      searchTags: new FormControl(''),
-      imageStore: new FormControl()
+      productCode: new FormControl(),
+      productName: new FormControl(),
+      productDescription: new FormControl(),
+      location: new FormControl(),
+      status: new FormControl(),
+      imageCredit: new FormControl(),
+      searchTags: new FormControl(),
+      dataStore: new FormGroup({
+        dataContent : new FormControl()
+      })
     });
   }
 
   getProduct(productId:number) {
     this.productService.getProduct(productId).subscribe(
-      data => (this.product = data),
+      data => 
+      {this.product = data;
+        this.productEditForm.controls.productCode.setValue(this.product.productCode);
+        this.productEditForm.controls.productName.setValue(this.product.productName);
+        this.productEditForm.controls.productDescription.setValue(this.product.productDescription);
+        this.productEditForm.controls.location.setValue(this.product.location);
+        this.productEditForm.controls.status.setValue(this.product.status);
+        this.productEditForm.controls.imageCredit.setValue(this.product.imageCredit);
+        this.productEditForm.controls.searchTags.setValue(this.product.searchTags);},
       error => console.error(error),
       () => console.log('Get Product to edit')
     );
-    this.productEditForm.patchValue({
-      productCode : this.product.productCode
-    });
+    
+  }
+
+  setValuesInForm() {
+    this.productEditForm.controls.productCode.setValue(this.product.productCode);
+    this.productEditForm.controls.productName.setValue(this.product.productName);
+    this.productEditForm.controls.productDescription.setValue(this.product.productDescription);
+    this.productEditForm.controls.location.setValue(this.product.location);
+    this.productEditForm.controls.status.setValue(this.product.status);
+    this.productEditForm.controls.imageCredit.setValue(this.product.imageCredit);
+    this.productEditForm.controls.searchTags.setValue(this.product.searchTags);
   }
 
   submitUpdateProduct(id:number) {
@@ -51,8 +80,7 @@ export class EditProductComponent implements OnInit {
         error => console.error(error),
         () => console.log('Product updated successfully !')
       );
-    }
-    
+    }  
   }
 
 }
