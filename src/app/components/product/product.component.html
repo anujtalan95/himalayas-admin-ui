@@ -1,4 +1,5 @@
 <h2>Product Section</h2>
+<a routerLink="/product/add" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add New Product</a>
 <div class="table-responsive">
   <table class="table">
     <thead class="thead-light">
@@ -11,6 +12,7 @@
         <th scope="col">Status</th>
         <th scope="col">Location</th>
         <th scope="col">Update</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -23,6 +25,7 @@
         <td>{{product.status}}</td>
         <td>{{product.location}}</td>
         <td><a [routerLink]="['/product/edit',product.id]">Edit</a></td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteProduct(product)">delete</button></td>
       </tr>
     </tbody>
   </table>
