@@ -28,7 +28,8 @@ export class ProductComponent implements OnInit {
   deleteProduct(productBody) {
     this.productService.deleteProduct(productBody.id).subscribe(
       data => {
-        this.router.navigate(['products']);
+        const index = this.products.indexOf(productBody);
+        this.products.splice(index, 1);
       },
       error => console.error(error),
       () => console.log("Product Deleted")
