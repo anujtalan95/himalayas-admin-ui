@@ -18,7 +18,7 @@
     <tbody>
       <tr *ngFor="let product of products; let i = index">
         <th scope="row">{{i+1}}</th>
-        <td>{{product.dataStore.dataType}}</td>
+        <td><img [src]="product.imageEmbeddedURL" alt="Generic placeholder image" width="50" height="50"></td>
         <td>{{product.productName}}</td>
         <td>{{product.productCode}}</td>
         <td>{{product.productDescription}}</td>

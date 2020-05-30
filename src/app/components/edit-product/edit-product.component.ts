@@ -25,6 +25,7 @@ export class EditProductComponent implements OnInit {
   ];
   //private  imgSrc = 'assets/684094.jpg';
   validMessage:string="";
+  imageEmbeddedURL:string="";
   constructor(private productService:ProductService,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit(): void {
@@ -37,9 +38,7 @@ export class EditProductComponent implements OnInit {
       status: new FormControl(),
       imageCredit: new FormControl(),
       searchTags: new FormControl(),
-      dataStore: new FormGroup({
-        dataContent : new FormControl()
-      })
+      imageEmbeddedURL: new FormControl()
     });
   }
 
@@ -53,21 +52,13 @@ export class EditProductComponent implements OnInit {
         this.productEditForm.controls.location.setValue(this.product.location);
         this.productEditForm.controls.status.setValue(this.product.status);
         this.productEditForm.controls.imageCredit.setValue(this.product.imageCredit);
-        this.productEditForm.controls.searchTags.setValue(this.product.searchTags);},
+        this.productEditForm.controls.searchTags.setValue(this.product.searchTags);
+        this.productEditForm.controls.imageEmbeddedURL.setValue(this.product.imageEmbeddedURL);
+        this.imageEmbeddedURL = this.product.imageEmbeddedURL},
       error => console.error(error),
       () => console.log('Get Product to edit')
     );
     
-  }
-
-  setValuesInForm() {
-    this.productEditForm.controls.productCode.setValue(this.product.productCode);
-    this.productEditForm.controls.productName.setValue(this.product.productName);
-    this.productEditForm.controls.productDescription.setValue(this.product.productDescription);
-    this.productEditForm.controls.location.setValue(this.product.location);
-    this.productEditForm.controls.status.setValue(this.product.status);
-    this.productEditForm.controls.imageCredit.setValue(this.product.imageCredit);
-    this.productEditForm.controls.searchTags.setValue(this.product.searchTags);
   }
 
   submitUpdateProduct(id:number) {

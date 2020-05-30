@@ -34,9 +34,7 @@ export class AddProductComponent implements OnInit {
       status: this.formBuilder.control(''),
       imageCredit: this.formBuilder.control(''),
       searchTags: this.formBuilder.control(''),
-      dataStore: this.formBuilder.group({
-        dataContent: this.formBuilder.control('')
-      })
+      imageEmbeddedURL: this.formBuilder.control('')
     });
   }
 
